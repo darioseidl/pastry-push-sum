@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/jcommander-1.30/jcommander-1.30.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://jcommander.org/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/commons-io-2.4/commons-io-2.4.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://commons.apache.org/proper/commons-io/javadocs/api-2.4/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/freepastry-2.1/FreePastry-2.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.freepastry.org/FreePastry/javadoc21/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.1/commons-lang3-3.1.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://commons.apache.org/proper/commons-lang/javadocs/api-3.1/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/commons-math3-3.2/commons-math3-3.2.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://commons.apache.org/proper/commons-math/javadocs/api-3.2/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

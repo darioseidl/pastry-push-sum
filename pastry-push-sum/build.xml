@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="pastry-push-sum">
+    
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+	
+    <path id="classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/commons-io-2.4/commons-io-2.4.jar"/>
+        <pathelement location="lib/commons-lang3-3.1/commons-lang3-3.1.jar"/>
+        <pathelement location="lib/commons-math3-3.2/commons-math3-3.2.jar"/>
+    	<pathelement location="lib/freepastry-2.1/FreePastry-2.1.jar"/>
+    	<pathelement location="lib/jcommander-1.30/jcommander-1.30.jar"/>
+    </path>
+
+	<!-- === clean targets === -->
+	
+    <target name="clean" description="Delete build artifacts and documentation.">
+        <delete dir="bin"/>
+    	<delete dir="doc"/>
+    </target>
+	
+	<target name="clean-plot" description="Delete plot data and images.">
+		<delete dir="plot"/>
+	</target>
+			
+    <target name="clean-all" depends="clean,clean-plot" description="Delete build artifacts, documentation and plots."/>
+	
+	<!-- === build targets === -->
+	
+    <target name="build" description="Compile the Java classes.">
+		<mkdir dir="bin"/>
+        <javac classpathref="classpath" debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+        </javac>
+    </target>
+	
+	<target name="docs" depends="build" description="Create the Javadoc.">
+		<javadoc classpathref="classpath" packagenames="*" sourcepath="src" destdir="doc"/>
+	</target>
+	
+	<!-- === example run targets === -->
+    
+	<target name="run-three-peers" depends="build" description="Run an example with three instances of PPSPeer in parallel.">
+		<parallel>
+			<sequential>
+				<java classname="univie.cs.pps.PPSPeer" classpathref="classpath" failonerror="true" fork="yes">
+					<arg line="-b=9001 -p=9001"/>
+				</java>
+			</sequential>
+			<sequential>
+			<sleep seconds="1"/>
+				<java classname="univie.cs.pps.PPSPeer" classpathref="classpath" failonerror="true" fork="yes">
+					<arg line="-b=9001 -p=9002"/>
+				</java>
+			</sequential>
+			<sequential>
+			<sleep seconds="2"/>
+				<java classname="univie.cs.pps.PPSPeer" classpathref="classpath" failonerror="true" fork="yes">
+					<arg line="-b=9001 -p=9004"/>
+				</java>
+			</sequential>
+		</parallel>
+    </target>
+	
+    <target name="run-simulator" depends="build" description="Run an example simulation with PPSSimulator.">
+        <java classname="univie.cs.pps.PPSSimulator" classpathref="classpath" failonerror="true" fork="yes">
+            <arg value="-n=10"/>
+        	<arg value="-s=100"/>
+            <arg value="-r=0"/>
+        	<arg value="-u=50"/>
+        	<arg value="--variateStd=0"/>
+        	<arg value="-j=0"/>
+        	<arg value="-l=0"/>
+        	<arg value="--min=0"/>
+        	<arg value="--max=10"/>
+        	<arg value="--resetInterval=0"/>
+        	<arg value="-v=2"/>
+        </java>
+    </target>
+            	
+	<!-- === plot targets === -->
+
+	<property name="ext" value="png" description="Plot image type: png or svg."/>
+	<property name="key" value="1" description="Plot with legend (1) or without (0)."/>
+		
+    <target name="-sim" depends="build">
+        <java classname="univie.cs.pps.PPSSimulator" classpathref="classpath" failonerror="true" fork="yes">
+            <arg value="-n=${nodes}"/>
+        	<arg value="-s=${steps}"/>
+            <arg value="-r=${randomSeed}"/>
+        	<arg value="-u=${updateInterval}"/>
+        	<arg value="--variateStd=${variateStd}"/>
+        	<arg value="-j=${joinInterval}"/>
+        	<arg value="-l=${leaveInterval}"/>
+        	<arg value="--min=${min}"/>
+        	<arg value="--max=${max}"/>
+        	<arg value="--resetInterval=${resetInterval}"/>
+        	<arg value="-v=2"/>
+        	<arg value="-o=${data}"/>
+        </java>
+    </target>
+		
+	<target name="-plot" depends="-sim">
+		<exec executable="gnuplot" osfamily="unix" failonerror="true">
+			<arg line="-e &quot;IMG='${img}';TERM='${ext}';DATA='${data}';STEPSIZE=1000;STEPS=${steps};TITLE='${title}';KEY=${key}&quot; ./plot.p"/>
+		</exec>
+		<exec executable="gnuplot" osfamily="mac" failonerror="true">
+			<arg line="-e &quot;IMG='${img}';TERM='${ext}';DATA='${data}';STEPSIZE=1000;STEPS=${steps};TITLE='${title}';KEY=${key}&quot; ./plot.p"/>
+		</exec>
+		<exec executable="gnuplot.exe" osfamily="windows" failonerror="true">
+			<arg line="-e &quot;IMG='${img}';TERM='${ext}';DATA='${data}';STEPSIZE=1000;STEPS=${steps};TITLE='${title}';KEY=${key}&quot; ./plot.p"/>
+		</exec>
+	</target>
+
+	<target name="plot-n10" description="Simulate and plot: 10 Nodes; No Variation.">
+		<antcall target="-plot">
+			<param name="data" value="plot/n100.data"/>
+			<param name="img" value="plot/n100.${ext}"/>
+			<param name="title" value="10 Nodes; No Variation"/>
+		    <param name="nodes" value="10" />
+			<param name="steps" value="100" />
+			<param name="randomSeed" value="0" />
+			<param name="updateInterval" value="50" />
+			<param name="variateStd" value="0" />
+			<param name="joinInterval" value="0" />
+			<param name="leaveInterval" value="0" />
+			<param name="min" value="0" />
+			<param name="max" value="10" />
+			<param name="resetInterval" value="0" />	
+		</antcall>
+	</target>
+	
+	<target name="plot-n100j100" description="Simulate and plot: 100 Nodes; 1 Node Joining/100 Steps.">
+		<antcall target="-plot">
+			<param name="data" value="plot/n100j100.data"/>
+			<param name="img" value="plot/n100j100.${ext}"/>
+			<param name="title" value="100 Nodes; 1 Node Joining/100 Steps"/>
+		    <param name="nodes" value="100" />
+			<param name="steps" value="500" />
+			<param name="randomSeed" value="0" />
+			<param name="updateInterval" value="50" />
+			<param name="variateStd" value="0" />
+			<param name="joinInterval" value="100" />
+			<param name="leaveInterval" value="0" />
+			<param name="min" value="0" />
+			<param name="max" value="10" />
+			<param name="resetInterval" value="0" />	
+		</antcall>
+	</target>
+	
+	<target name="plot-n100j10" description="Simulate and plot: 100 Nodes; 1 Node Joining/10 Steps.">
+		<antcall target="-plot">
+			<param name="data" value="plot/n100j10.data"/>
+			<param name="img" value="plot/n100j10.${ext}"/>
+			<param name="title" value="100 Nodes; 1 Node Joining/10 Steps"/>
+		    <param name="nodes" value="100" />
+			<param name="steps" value="500" />
+			<param name="randomSeed" value="0" />
+			<param name="updateInterval" value="50" />
+			<param name="variateStd" value="0" />
+			<param name="joinInterval" value="10" />
+			<param name="leaveInterval" value="0" />
+			<param name="min" value="0" />
+			<param name="max" value="10" />
+			<param name="resetInterval" value="0" />	
+		</antcall>
+	</target>
+	
+	<target name="plot-n10v100" description="Simulate and plot: 10 Nodes; Value Variation/100 Steps.">
+		<antcall target="-plot">
+			<param name="data" value="plot/n10v100.data"/>
+			<param name="img" value="plot/n10v100.${ext}"/>
+			<param name="title" value="10 Nodes; Value Variation/100 Steps"/>
+		    <param name="nodes" value="10" />
+			<param name="steps" value="500" />
+			<param name="randomSeed" value="0" />
+			<param name="updateInterval" value="100" />
+			<param name="variateStd" value="1" />
+			<param name="joinInterval" value="0" />
+			<param name="leaveInterval" value="0" />
+			<param name="min" value="0" />
+			<param name="max" value="10" />
+			<param name="resetInterval" value="0" />	
+		</antcall>
+	</target>
+	
+	<target name="plot-n10v100j50" description="Simulate and plot: 10 Nodes; Value Variation/100 Steps, 1 Node Joining/50 Steps.">
+		<antcall target="-plot">
+			<param name="data" value="plot/n10v100j50.data"/>
+			<param name="img" value="plot/n10v100j50.${ext}"/>
+			<param name="title" value="10 Nodes; Value Variation/100 Steps, 1 Node Joining/50 Steps"/>
+		    <param name="nodes" value="10" />
+			<param name="steps" value="500" />
+			<param name="randomSeed" value="0" />
+			<param name="updateInterval" value="100" />
+			<param name="variateStd" value="1" />
+			<param name="joinInterval" value="50" />
+			<param name="leaveInterval" value="0" />
+			<param name="min" value="0" />
+			<param name="max" value="10" />
+			<param name="resetInterval" value="0" />	
+		</antcall>
+	</target>
+	
+	<target name="plot-n10v100j50l75" description="Simulate and plot: 10 Nodes; Value Variation/100 Steps, 1 Node Joining/50 Steps; 1 Node Leaving/75 Stepss.">
+		<antcall target="-plot">
+			<param name="data" value="plot/n10v100j50l75.data"/>
+			<param name="img" value="plot/n10v100j50l75.${ext}"/>
+			<param name="title" value="10 Nodes; Value Variation/100 Steps, 1 Node Joining/50 Steps; 1 Node Leaving/75 Steps"/>
+		    <param name="nodes" value="10" />
+			<param name="steps" value="500" />
+			<param name="randomSeed" value="0" />
+			<param name="updateInterval" value="100" />
+			<param name="variateStd" value="1" />
+			<param name="joinInterval" value="50" />
+			<param name="leaveInterval" value="75" />
+			<param name="min" value="0" />
+			<param name="max" value="10" />
+			<param name="resetInterval" value="250" />	
+		</antcall>
+	</target>
+	
+	<target name="all-plots" depends="clean-plot,plot-n10,plot-n100j100,plot-n100j10,plot-n10v100,plot-n10v100j50,plot-n10v100j50l75" description="Simulate and plot all parameter sets."/>
+
+	<target name="all-plots-open" depends="all-plots" description="Simulate and plot all parameter sets; open an image of all plots combined.">
+		<exec executable="montage" osfamily="unix">
+			<arg line="-geometry +0+0 -border 1 ./plot/*.${ext} ./plot/all.png"/>
+		</exec>
+		<exec executable="xdg-open" osfamily="unix">
+			<arg line="./plot/all.png"/>
+		</exec>
+	</target>
+	
+</project>
