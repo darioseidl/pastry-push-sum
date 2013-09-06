@@ -5,7 +5,7 @@ Pastry-Push-Sum is an implementation of the Push-Sum [1] algorithm as a
 FreePastry [2] application.
 
 Push-Sum is a gossip-based protocol for calculating aggregates (such as the 
-mean) among all nodes in graph. It is fully decentralized, based on 
+mean) among all nodes in the graph. It is fully decentralized, based on 
 exchanging messages with randomly selected neighbors. It requires no 
 knowledge about the network topology and supports nodes joining the network 
 and nodes changing their value at any time. To achieve a high convergence 
