@@ -152,7 +152,7 @@ public class PPSSetup
 	 *            A {@link ValueReaderFactory} that creates {@link ValueReader}
 	 *            instances for the new nodes.
 	 * @param stepSize
-	 *            The time between sending heartbeat messages to the nodes to
+	 *            The time between sending notification messages to the nodes to
 	 *            execute a step of the Push-Sum algorithm.
 	 * @param updateInterval
 	 *            The number of steps between updating node values. If set to 0,
@@ -274,7 +274,7 @@ public class PPSSetup
 	 *            A {@link ValueReaderFactory} that creates {@link ValueReader}
 	 *            instances for the new nodes.
 	 * @param stepSize
-	 *            The time between sending heartbeat messages to the nodes to
+	 *            The time between sending notification messages to the nodes to
 	 *            execute a step of the Push-Sum algorithm.
 	 * @param updateInterval
 	 *            The number of steps between updating node values. If set to 0,

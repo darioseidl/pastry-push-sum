@@ -93,7 +93,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	private double valueBuffer;
 	private double weightBuffer;
 
-	private CancellableTask heartbeat;
+	private CancellableTask timer;
 
 	/**
 	 * Constructs and registers a new {@link PastryPushSum} application.
@@ -101,7 +101,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	 * @param node
 	 *            The node at which this application will be registered.
 	 * @param stepSize
-	 *            The time between sending heartbeat messages to the node to
+	 *            The time between sending notification messages to the node to
 	 *            execute a step of the Push-Sum algorithm.
 	 * @param updateInterval
 	 *            The number of steps between updating node value. If set to 0
@@ -141,8 +141,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		endpoint = node.buildEndpoint(this, INSTANCE);
 		endpoint.register();
 
-		//schedule heartbeat messages 
-		heartbeat = endpoint.scheduleMessage(new TimerMessage(), 0, stepSize);
+		//schedule timer messages 
+		timer = endpoint.scheduleMessage(new TimerMessage(), 0, stepSize);
 		active = true;
 
 		//subscribe to a scribe topic for reset notifications
@@ -164,7 +164,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		{
 			log("stop.");
 
-			heartbeat.cancel();
+			timer.cancel();
 			active = false;
 		}
 	}
@@ -178,7 +178,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		{
 			log("resume.");
 
-			heartbeat = endpoint.scheduleMessage(new TimerMessage(), 0, stepSize);
+			timer = endpoint.scheduleMessage(new TimerMessage(), 0, stepSize);
 			active = true;
 		}
 	}

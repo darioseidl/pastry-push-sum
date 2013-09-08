@@ -133,10 +133,10 @@ public final class PPSSimulator
 	@Parameter(names = { "-n", "--nodes" }, description = "Number of nodes.", validateWith = PositiveInteger.class)
 	private final Integer nodes = 10;
 
-	@Parameter(names = { "-s", "--steps" }, description = "Number of steps (i.e stop after simulation time is larger than steps times step size).", validateWith = PositiveInteger.class)
+	@Parameter(names = { "-s", "--steps" }, description = "Number of steps. The simulation stops after simulation time is larger than steps times step size.", validateWith = PositiveInteger.class)
 	private final Integer steps = 100;
 
-	@Parameter(names = { "--stepSize" }, description = "Step size (i.e. time between heartbeat messages).", validateWith = PositiveInteger.class)
+	@Parameter(names = { "--stepSize" }, description = "Step size (i.e. time between notification messages).", validateWith = PositiveInteger.class)
 	private final Integer stepSize = 1000;
 
 	@Parameter(names = { "--leafsetSize" }, description = "Maximum size of the leafsets.", validateWith = PositiveInteger.class)
