@@ -37,7 +37,14 @@
     </target>
 	
 	<target name="docs" depends="build" description="Create the Javadoc.">
-		<javadoc classpathref="classpath" packagenames="*" sourcepath="src" destdir="doc"/>
+		<javadoc classpathref="classpath" packagenames="*" sourcepath="src" destdir="doc">
+			<link href="http://docs.oracle.com/javase/6/docs/api/"/>
+			<link href="http://commons.apache.org/proper/commons-io/javadocs/api-2.4/"/>
+			<link href="http://commons.apache.org/proper/commons-lang/javadocs/api-3.1/"/>
+			<link href="http://commons.apache.org/proper/commons-math/javadocs/api-3.2/"/>
+			<link href="http://www.freepastry.org/FreePastry/javadoc/"/>
+			<link href="http://jcommander.org/apidocs/"/>
+		</javadoc>
 	</target>
 	
 	<!-- === example run targets === -->

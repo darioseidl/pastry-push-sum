@@ -234,12 +234,14 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	}
 
 	/**
-	 * Sends a reset notification to all nodes.
+	 * Sends a reset notification to all nodes.<br/>
+	 * <br/>
+	 * Since this is not a barrier, the resets introduce an error in the
+	 * accuracy of the estimates. Overall it may be better not to do any resets,
+	 * letting the contribution of stopped nodes "fade out".
 	 */
 	public void broadcastReset()
 	{
-		// XXX since this is not a barrier, the resets introduce an error in the accuracy of the estimates;
-		// overall we may be better off doing nothing, letting the contribution of stopped nodes "fade out"
 		scribe.publish(resetTopic, new ResetNotification());
 	}
 
