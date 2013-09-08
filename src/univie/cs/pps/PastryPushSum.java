@@ -45,8 +45,9 @@ import univie.cs.pps.utils.ValueReader;
 /**
  * An implementation of the Push-Sum algorithm as a Pastry application.<br/>
  * <br/>
- * We implement the {@link Application} interface to send messages to random
- * nodes in the ring and the {@link ScribeMultiClient} interface to broadcast a
+ * We implement the {@link rice.p2p.commonapi.Application} interface to send
+ * messages to random nodes in the ring and the
+ * {@link rice.p2p.scribe.ScribeMultiClient} interface to broadcast a
  * notifications to all nodes.
  * 
  * @author Dario Seidl

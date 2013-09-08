@@ -127,7 +127,7 @@ public class PPSSetup
 	 *            node, and incremented by 1 for each node thereafter.
 	 * @throws IOException
 	 *             If the bootAddress cannot be parsed or the construction of
-	 *             the {@link SocketPastryNodeFactory} fails.
+	 *             the {@link rice.pastry.socket.SocketPastryNodeFactory} fails.
 	 */
 	public PPSSetup(String bootAddress, int bootPort, int bindPort) throws IOException
 	{
@@ -167,8 +167,8 @@ public class PPSSetup
 	 *            If set to true, the new nodes will log all sent and received
 	 *            messages.
 	 * @param doAfter
-	 *            A {@link TimerTask} to execute after all nodes have been
-	 *            booted.
+	 *            A {@link rice.selector.TimerTask} to execute after all nodes
+	 *            have been booted.
 	 */
 	public void scheduleJoiningNodes(long period, final int nodes, final ValueReaderFactory valueReaderFactory, final int stepSize,
 			final int updateInterval, final double min, final double max, final boolean traceMessages, final TimerTask doAfter)
@@ -390,7 +390,7 @@ public class PPSSetup
 	}
 
 	/**
-	 * Returns the Pastry {@link Environment}.
+	 * Returns the Pastry {@link rice.environment.Environment}.
 	 */
 	public Environment getEnvironment()
 	{

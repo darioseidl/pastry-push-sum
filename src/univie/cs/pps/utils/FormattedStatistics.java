@@ -25,8 +25,9 @@ package univie.cs.pps.utils;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 /**
- * A simple subclass of {@link SummaryStatistics} for convenient printing of a
- * table of statistics.
+ * A subclass of
+ * {@link org.apache.commons.math3.stat.descriptive.SummaryStatistics} for
+ * convenient printing of a table of statistics.
  * 
  * @author Dario Seidl
  * 
