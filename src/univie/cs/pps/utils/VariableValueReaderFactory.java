@@ -54,8 +54,8 @@ public class VariableValueReaderFactory implements ValueReaderFactory
 	 *            normal distribution with mean 0 and standard deviation
 	 *            <code>std</code>.
 	 * @param randomSource
-	 *            An instance of {@link rice.environment.random.RandomSource}
-	 *            used for generating the random numbers in this class.
+	 *            An instance of {@link RandomSource} used for generating the
+	 *            random numbers in this class.
 	 */
 	public VariableValueReaderFactory(double mean, double std, double variateStd, RandomSource randomSource)
 	{

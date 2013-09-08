@@ -127,7 +127,7 @@ public class PPSSetup
 	 *            node, and incremented by 1 for each node thereafter.
 	 * @throws IOException
 	 *             If the bootAddress cannot be parsed or the construction of
-	 *             the {@link rice.pastry.socket.SocketPastryNodeFactory} fails.
+	 *             the {@link SocketPastryNodeFactory} fails.
 	 */
 	public PPSSetup(String bootAddress, int bootPort, int bindPort) throws IOException
 	{
@@ -390,7 +390,7 @@ public class PPSSetup
 	}
 
 	/**
-	 * Returns the Pastry {@link rice.environment.Environment}.
+	 * Returns the Pastry {@link Environment}.
 	 */
 	public Environment getEnvironment()
 	{
