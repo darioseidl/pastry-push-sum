@@ -166,7 +166,7 @@ public final class PPSSimulator
 	@Parameter(names = { "-l", "--leaveInterval" }, description = "Interval at which nodes leave (i.e. stop participating). Set to zero to disable leaving of nodes.", validateWith = NonNegativeInteger.class)
 	private final Integer leaveInterval = 0;
 
-	@Parameter(names = { "--resetInterval" }, description = "Interval at which a broadcast is sent to all node to initiate a reset of the algorithm. Set to zero to disable resetting.", validateWith = NonNegativeInteger.class)
+	@Parameter(names = { "--resetInterval" }, description = "Interval at which a broadcast is sent to all node to initiate a reset of the protocol. Set to zero to disable resetting.", validateWith = NonNegativeInteger.class)
 	private final Integer resetInterval = 0;
 
 	@Parameter(names = { "-r", "--randomSeed" }, description = "If set to a value different from 0, use this as the random seed for the simulator. Not used if --bootPort is set.")

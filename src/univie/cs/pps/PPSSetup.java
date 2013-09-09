@@ -152,8 +152,8 @@ public class PPSSetup
 	 *            A {@link ValueReaderFactory} that creates {@link ValueReader}
 	 *            instances for the new nodes.
 	 * @param stepSize
-	 *            The time between sending notification messages to the nodes to
-	 *            execute a step of the Push-Sum algorithm.
+	 *            The time between sending messages to the node to signal the
+	 *            start of the next step in the Push-Sum protocol.
 	 * @param updateInterval
 	 *            The number of steps between updating node values. If set to 0,
 	 *            the node values will never be updated.
@@ -274,8 +274,8 @@ public class PPSSetup
 	 *            A {@link ValueReaderFactory} that creates {@link ValueReader}
 	 *            instances for the new nodes.
 	 * @param stepSize
-	 *            The time between sending notification messages to the nodes to
-	 *            execute a step of the Push-Sum algorithm.
+	 *            The time between sending messages to the node to signal the
+	 *            start of the next step in the Push-Sum protocol.
 	 * @param updateInterval
 	 *            The number of steps between updating node values. If set to 0,
 	 *            the node values will never be updated.
@@ -315,7 +315,7 @@ public class PPSSetup
 
 	/**
 	 * Broadcast a message from the first node to all nodes, initiating a reset
-	 * of the Push-Sum algorithm.
+	 * of the Push-Sum protocol.
 	 */
 	public void scheduleReset(long period)
 	{

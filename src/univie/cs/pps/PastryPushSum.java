@@ -43,7 +43,7 @@ import rice.pastry.standard.RandomNodeIdFactory;
 import univie.cs.pps.utils.ValueReader;
 
 /**
- * An implementation of the Push-Sum algorithm as a Pastry application.<br/>
+ * An implementation of the Push-Sum protocol as a Pastry application.<br/>
  * <br/>
  * We implement the {@link Application} interface to send messages to random
  * nodes in the ring and the {@link ScribeMultiClient} interface to broadcast a
@@ -100,8 +100,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	 * @param node
 	 *            The node at which this application will be registered.
 	 * @param stepSize
-	 *            The time between sending notification messages to the node to
-	 *            execute a step of the Push-Sum algorithm.
+	 *            The time between sending messages to the node to signal the
+	 *            start of the next step in the Push-Sum protocol.
 	 * @param updateInterval
 	 *            The number of steps between updating node value. If set to 0
 	 *            the node values will never be updated.
@@ -201,7 +201,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	}
 
 	/**
-	 * Returns the current value, used by the Push-Sum algorithm to estimate the
+	 * Returns the current value, used by the Push-Sum protocol to estimate the
 	 * mean.
 	 */
 	public double getValue()
@@ -210,8 +210,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	}
 
 	/**
-	 * Returns the current weight, used by the Push-Sum algorithm to estimate
-	 * the mean.
+	 * Returns the current weight, used by the Push-Sum protocol to estimate the
+	 * mean.
 	 */
 	public double getWeight()
 	{
@@ -220,8 +220,9 @@ public class PastryPushSum implements Application, ScribeMultiClient
 
 	/**
 	 * Returns the average value of all nodes in the ring, as estimated by the
-	 * Push-Sum algorithm. The estimate is obtained by value / weight, bounded
-	 * by the min and max values given in the constructor.<br/>
+	 * Push-Sum protocol. The estimate is obtained by
+	 * <code>value / weight</code>, bounded by the <code>min</code> and
+	 * <code>max</code> values given in the constructor.<br/>
 	 * <br/>
 	 * If the true value has been updated recently, this will return the true
 	 * value instead, until one message from another node is received, as in
