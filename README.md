@@ -45,13 +45,13 @@ Pastry simulator under different parameters. The output is suitable for
 being plotted with Gnuplot.
 
 You can import the project in Eclipse or run the applications using the 
-following commands.
+following commands:
 
-PPSPeer:
+For PPSPeer
 
 	java -classpath ./bin:./lib/freepastry-2.1/FreePastry-2.1.jar:./lib/jcommander-1.30/jcommander-1.30.jar:./lib/commons-io-2.4/commons-io-2.4.jar:./lib/commons-lang3-3.1/commons-lang3-3.1.jar:./lib/commons-math3-3.2/commons-math3-3.2.jar univie.cs.pps.PPSPeer -h
 
-PPSSimulator:
+For PPSSimulator
 
 	java -classpath ./bin:./lib/freepastry-2.1/FreePastry-2.1.jar:./lib/jcommander-1.30/jcommander-1.30.jar:./lib/commons-io-2.4/commons-io-2.4.jar:./lib/commons-lang3-3.1/commons-lang3-3.1.jar:./lib/commons-math3-3.2/commons-math3-3.2.jar univie.cs.pps.PPSSimulator -h
 
@@ -75,16 +75,20 @@ An example simulation can be started with
 
 	ant run-simulator
 
-And an example of three peers running in parallel, bound to localhost:9001, 
-localhost:9002 and localhost:9003, is started with:
+An example of three peers running in parallel, bound to localhost:9001, 
+localhost:9002 and localhost:9003, can be started with
 
 	ant run-three-peers
 
-With Gnuplot installed and the binary in your path
+With Gnuplot installed and the binary in your path, the following command 
+will run several simulations and plot the results:
 
 	ant all-plots
 	
-will run several simulations and plot the results.
+If you have Gnuplot installed, but the binary is not in your path, you can 
+specify the location in the gnuplot_bin ant property. For example
+
+	ant -Dgnuplot_bin="C:\Program Files (x86)\gnuplot\bin\gnuplot.exe" all-plots
 
 
 
