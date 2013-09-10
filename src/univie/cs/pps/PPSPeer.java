@@ -32,7 +32,7 @@ import org.apache.commons.lang3.builder.StandardToStringStyle;
 
 import rice.selector.TimerTask;
 import univie.cs.pps.utils.ValueReaderFactory;
-import univie.cs.pps.utils.VariableValueReaderFactory;
+import univie.cs.pps.utils.GaussianValueReaderFactory;
 import univie.cs.pps.validators.AnyDouble;
 import univie.cs.pps.validators.NonNegativeInteger;
 import univie.cs.pps.validators.PositiveInteger;
@@ -142,7 +142,7 @@ public class PPSPeer
 			final PPSSetup ppss = new PPSSetup(bootAddress, bootPort, bindPort);
 
 			//XXX replace this with the actual data source
-			ValueReaderFactory valueReaderFactory = new VariableValueReaderFactory(2, 1, 1, ppss.getEnvironment().getRandomSource());
+			ValueReaderFactory valueReaderFactory = new GaussianValueReaderFactory(2, 1, 1, ppss.getEnvironment().getRandomSource());
 
 			//boot node
 			ppss.scheduleJoiningNodes(STEP_SIZE, 1, valueReaderFactory, STEP_SIZE, updateInterval, min, max, traceMessages, new TimerTask()

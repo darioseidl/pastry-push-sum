@@ -35,7 +35,7 @@ import org.apache.commons.lang3.builder.StandardToStringStyle;
 
 import rice.selector.TimerTask;
 import univie.cs.pps.utils.ValueReaderFactory;
-import univie.cs.pps.utils.VariableValueReaderFactory;
+import univie.cs.pps.utils.GaussianValueReaderFactory;
 import univie.cs.pps.validators.AnyDouble;
 import univie.cs.pps.validators.NonNegativeDouble;
 import univie.cs.pps.validators.NonNegativeInteger;
@@ -200,7 +200,7 @@ public final class PPSSimulator
 			ppss.getEnvironment().getParameters().setInt("pastry_lSetSize", leafsetSize);
 
 			//simulate variable values
-			final ValueReaderFactory valueReaderFactory = new VariableValueReaderFactory(mean, std, variateStd, ppss.getEnvironment()
+			final ValueReaderFactory valueReaderFactory = new GaussianValueReaderFactory(mean, std, variateStd, ppss.getEnvironment()
 					.getRandomSource());
 
 			//add initial nodes

@@ -45,7 +45,7 @@ import rice.selector.TimerTask;
 import univie.cs.pps.utils.FormattedStatistics;
 import univie.cs.pps.utils.ValueReader;
 import univie.cs.pps.utils.ValueReaderFactory;
-import univie.cs.pps.utils.VariableValueReader;
+import univie.cs.pps.utils.GaussianValueReader;
 
 /**
  * The PPSSetup class is used by {@link PPSSimulator} and {@link PPSPeer} to
@@ -58,7 +58,7 @@ public class PPSSetup
 {
 	/**
 	 * Used to keep track of node variations from the
-	 * {@link VariableValueReader} objects, for logging and plotting.
+	 * {@link GaussianValueReader} objects, for logging and plotting.
 	 */
 	public static void addVariation(double v)
 	{
