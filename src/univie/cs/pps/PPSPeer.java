@@ -7,17 +7,17 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package univie.cs.pps;
@@ -31,8 +31,8 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.StandardToStringStyle;
 
 import rice.selector.TimerTask;
-import univie.cs.pps.utils.ValueReaderFactory;
 import univie.cs.pps.utils.GaussianValueReaderFactory;
+import univie.cs.pps.utils.ValueReaderFactory;
 import univie.cs.pps.validators.AnyDouble;
 import univie.cs.pps.validators.NonNegativeInteger;
 import univie.cs.pps.validators.PositiveInteger;
@@ -138,19 +138,19 @@ public class PPSPeer
 	{
 		try
 		{
-			//create the environment
+			// create the environment
 			final PPSSetup ppss = new PPSSetup(bootAddress, bootPort, bindPort);
 
-			//XXX replace this with the actual data source
+			// XXX replace this with the actual data source
 			ValueReaderFactory valueReaderFactory = new GaussianValueReaderFactory(2, 1, 1, ppss.getEnvironment().getRandomSource());
 
-			//boot node
+			// boot node
 			ppss.scheduleJoiningNodes(STEP_SIZE, 1, valueReaderFactory, STEP_SIZE, updateInterval, min, max, traceMessages, new TimerTask()
 			{
 				@Override
 				public void run()
 				{
-					//schedule logging
+					// schedule logging
 					ppss.scheduleObservation(0, STEP_SIZE, 1);
 				}
 			});

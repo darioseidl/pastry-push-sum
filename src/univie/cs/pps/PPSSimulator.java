@@ -7,17 +7,17 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package univie.cs.pps;
@@ -34,8 +34,8 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.StandardToStringStyle;
 
 import rice.selector.TimerTask;
-import univie.cs.pps.utils.ValueReaderFactory;
 import univie.cs.pps.utils.GaussianValueReaderFactory;
+import univie.cs.pps.utils.ValueReaderFactory;
 import univie.cs.pps.validators.AnyDouble;
 import univie.cs.pps.validators.NonNegativeDouble;
 import univie.cs.pps.validators.NonNegativeInteger;
@@ -194,45 +194,46 @@ public final class PPSSimulator
 	{
 		try
 		{
-			//create the environment
+			// create the environment
 			final PPSSetup ppss = (port != null) ? new PPSSetup(bootAddress, port, port) : new PPSSetup(randomSeed);
 
 			ppss.getEnvironment().getParameters().setInt("pastry_lSetSize", leafsetSize);
 
-			//simulate variable values
+			// simulate variable values
 			final ValueReaderFactory valueReaderFactory = new GaussianValueReaderFactory(mean, std, variateStd, ppss.getEnvironment()
 					.getRandomSource());
 
-			//add initial nodes
+			// add initial nodes
 			ppss.scheduleJoiningNodes(stepSize, nodes, valueReaderFactory, stepSize, updateInterval, min, max, traceMessages,
 					new TimerTask()
 					{
 						@Override
 						public void run()
 						{
-							//periodically add more nodes
+							// periodically add more nodes
 							if (joinInterval > 0)
 							{
 								ppss.scheduleJoiningNodes(joinInterval * stepSize, valueReaderFactory, stepSize, updateInterval, min, max,
 										traceMessages);
 							}
 
-							//periodically stop nodes
+							// periodically stop nodes
 							if (leaveInterval > 0)
 							{
 								ppss.scheduleLeavingNodes(leaveInterval * stepSize);
 							}
 
-							//periodically broadcast from root to initiate resets
+							// periodically broadcast from root to initiate
+							// resets
 							if (resetInterval > 0)
 							{
 								ppss.scheduleReset(resetInterval * stepSize);
 							}
 
-							//logging
+							// logging
 							ppss.scheduleObservation(0, stepSize, verbosity);
 
-							//terminate after the given number of steps
+							// terminate after the given number of steps
 							ppss.scheduleTermination(steps * stepSize);
 						}
 					});
