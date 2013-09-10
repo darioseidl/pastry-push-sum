@@ -164,8 +164,8 @@ public class PPSSetup
 	 *            the domain-specific maximum possible value, used as an upper
 	 *            bound for the estimates.
 	 * @param traceMessages
-	 *            if set to true, the new nodes will log all sent and received
-	 *            messages.
+	 *            if set to @code true}, the new nodes will log all sent and
+	 *            received messages.
 	 * @param doAfter
 	 *            a {@link rice.selector.TimerTask} to execute after all nodes
 	 *            have been booted.

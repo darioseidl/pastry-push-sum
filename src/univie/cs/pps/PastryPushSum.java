@@ -45,9 +45,9 @@ import univie.cs.pps.utils.ValueReader;
 /**
  * An implementation of the Push-Sum protocol as a Pastry application.
  * <p>
- * We implement the {@link Application} interface to send messages to random
- * nodes in the ring and the {@link ScribeMultiClient} interface to broadcast a
- * notifications to all nodes.
+ * This class implements the {@link Application} interface to send messages to
+ * random nodes in the ring and the {@link ScribeMultiClient} interface to
+ * broadcast notifications to all nodes.
  * 
  * @author Dario Seidl
  * 
@@ -65,9 +65,9 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	public static final String SCRIBE_INSTANCE = "push-sum-scribe-instance";
 
 	/**
-	 * The name of the topic used for reset notifications.
+	 * The name of the Scribe topic used for reset notifications.
 	 */
-	public static final String TOPIC_NAME = "push-sum-reset-topic";
+	public static final String SCRIBE_TOPIC = "push-sum-scribe-topic";
 
 	private final Node node;
 	private final Endpoint endpoint;
@@ -115,8 +115,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	 *            the domain-specific maximum possible value, used as an upper
 	 *            bound for the estimates.
 	 * @param trace
-	 *            if set to true, the node will print a notice about all sent
-	 *            and received messages to the standard output.
+	 *            if set to {@code true}, the node will print a notice about all
+	 *            sent and received messages to the standard output.
 	 */
 	public PastryPushSum(Node node, int stepSize, int updateInterval, ValueReader valueReader, double min, double max, boolean trace)
 	{
@@ -146,16 +146,16 @@ public class PastryPushSum implements Application, ScribeMultiClient
 
 		// subscribe to a Scribe topic for reset notifications
 		scribe = new ScribeImpl(node, SCRIBE_INSTANCE);
-		resetTopic = new Topic(new PastryIdFactory(node.getEnvironment()), TOPIC_NAME);
+		resetTopic = new Topic(new PastryIdFactory(node.getEnvironment()), SCRIBE_TOPIC);
 		scribe.subscribe(resetTopic, this, null, null);
 	}
 
 	/**
-	 * Stops the participation of this node. There is no way to actually remove
-	 * an application from the ring. We simply stop sending messages.
+	 * Stops the participation of this node.
 	 * <p>
-	 * When receiving a message while stopped, this node will forward the
-	 * message to another random node.
+	 * There is no way to actually remove an application from the ring. We
+	 * simply stop sending messages. When receiving a message while stopped,
+	 * this node will forward the message to another random node.
 	 */
 	public void stop()
 	{
@@ -381,7 +381,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * Called when an anycast is received for a topic this node has subscribed.
 	 * <p>
-	 * This application doesn't use anycasts.
+	 * This class never uses anycasts.
 	 */
 	@Override
 	public boolean anycast(Topic topic, ScribeContent content)
@@ -392,7 +392,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * Called when an child is added to a topic this node has subscribed.
 	 * <p>
-	 * No action, except logging, is taken on this event.
+	 * No action, except logging, is taken in this event.
 	 */
 	@Override
 	public void childAdded(Topic topic, NodeHandle child)
@@ -406,7 +406,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * Called when an child is removed to a topic this node has subscribed.
 	 * <p>
-	 * No action, except logging, is taken on this event.
+	 * No action, except logging, is taken in this event.
 	 */
 	@Override
 	public void childRemoved(Topic topic, NodeHandle child)
@@ -420,7 +420,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * Called when subscribing to a topic failed.
 	 * <p>
-	 * No action, except logging, is taken on this event.
+	 * No action, except logging, is taken in this event.
 	 */
 	@Override
 	@Deprecated
@@ -435,7 +435,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * Called when subscribing to a topic failed.
 	 * <p>
-	 * No action, except logging, is taken on this event.
+	 * No action, except logging, is taken in this event.
 	 */
 	@Override
 	public void subscribeFailed(Collection<Topic> topics)
@@ -449,7 +449,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * Called when subscribing to a topic succeeded.
 	 * <p>
-	 * No action, except logging, is taken on this event.
+	 * No action, except logging, is taken in this event.
 	 */
 	@Override
 	public void subscribeSuccess(Collection<Topic> topics)
