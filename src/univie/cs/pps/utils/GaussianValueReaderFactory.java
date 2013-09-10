@@ -64,6 +64,10 @@ public class GaussianValueReaderFactory implements ValueReaderFactory
 		this.randomSource = randomSource;
 	}
 
+	/**
+	 * Returns a new {@link GaussianValueReader} initialized with the same
+	 * parameters as this class.
+	 */
 	@Override
 	public ValueReader createValueReader()
 	{
