@@ -108,15 +108,13 @@
         	<arg value="-o=${data}"/>
         </java>
     </target>
-		
+	
+	<condition property="gnuplot_bin" value="gnuplot.exe" else="gnuplot">
+		<os family="windows"/>
+	</condition>
+	
 	<target name="-plot" depends="-sim">
-		<exec executable="gnuplot" osfamily="unix" failonerror="true">
-			<arg line="-e &quot;IMG='${img}';TERM='${ext}';DATA='${data}';STEPSIZE=1000;STEPS=${steps};TITLE='${title}';KEY=${key}&quot; ./plot.p"/>
-		</exec>
-		<exec executable="gnuplot" osfamily="mac" failonerror="true">
-			<arg line="-e &quot;IMG='${img}';TERM='${ext}';DATA='${data}';STEPSIZE=1000;STEPS=${steps};TITLE='${title}';KEY=${key}&quot; ./plot.p"/>
-		</exec>
-		<exec executable="gnuplot.exe" osfamily="windows" failonerror="true">
+		<exec executable="${gnuplot_bin}" failonerror="true">
 			<arg line="-e &quot;IMG='${img}';TERM='${ext}';DATA='${data}';STEPSIZE=1000;STEPS=${steps};TITLE='${title}';KEY=${key}&quot; ./plot.p"/>
 		</exec>
 	</target>
