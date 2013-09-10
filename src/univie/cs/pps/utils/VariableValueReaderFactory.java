@@ -43,18 +43,18 @@ public class VariableValueReaderFactory implements ValueReaderFactory
 	 * <code>mean</mean> and standard deviation <code>std</code>.
 	 * 
 	 * @param mean
-	 *            Mean of the normal distribution from which the initial value
-	 *            is chosen.
+	 *            the mean of the normal distribution from which the initial
+	 *            value is chosen.
 	 * @param std
-	 *            Standard deviation of the normal distribution from which the
-	 *            initial value is chosen.
+	 *            the standard deviation of the normal distribution from which
+	 *            the initial value is chosen.
 	 * @param variateStd
-	 *            After each call of <code>ValueReader.getCurrentValue()</code>
+	 *            after each call of <code>ValueReader.getCurrentValue()</code>
 	 *            the value is changed by a number chosen at random from a
 	 *            normal distribution with mean 0 and standard deviation
 	 *            <code>std</code>.
 	 * @param randomSource
-	 *            An instance of {@link RandomSource} used for generating the
+	 *            an instance of {@link RandomSource} used for generating the
 	 *            random numbers in this class.
 	 */
 	public VariableValueReaderFactory(double mean, double std, double variateStd, RandomSource randomSource)

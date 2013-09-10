@@ -43,8 +43,8 @@ import rice.pastry.standard.RandomNodeIdFactory;
 import univie.cs.pps.utils.ValueReader;
 
 /**
- * An implementation of the Push-Sum protocol as a Pastry application.<br/>
- * <br/>
+ * An implementation of the Push-Sum protocol as a Pastry application.
+ * <p>
  * We implement the {@link Application} interface to send messages to random
  * nodes in the ring and the {@link ScribeMultiClient} interface to broadcast a
  * notifications to all nodes.
@@ -98,24 +98,24 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	 * Constructs and registers a new {@link PastryPushSum} application.
 	 * 
 	 * @param node
-	 *            The node at which this application will be registered.
+	 *            the node at which this application will be registered.
 	 * @param stepSize
-	 *            The time between sending messages to the node to signal the
-	 *            start of the next step in the Push-Sum protocol.
+	 *            the time between sending messages to the node to signal the
+	 *            start of the next step.
 	 * @param updateInterval
-	 *            The number of steps between updating node value. If set to 0
+	 *            the number of steps between updating node value. If set to 0
 	 *            the node values will never be updated.
 	 * @param valueReader
-	 *            The {@link ValueReader} instance from which the node obtains
+	 *            the {@link ValueReader} instance from which the node obtains
 	 *            its true value.
 	 * @param min
-	 *            The domain-specific minimum possible value, used as a lower
+	 *            the domain-specific minimum possible value, used as a lower
 	 *            bound for the estimates.
 	 * @param max
-	 *            The domain-specific maximum possible value, used as an upper
+	 *            the domain-specific maximum possible value, used as an upper
 	 *            bound for the estimates.
 	 * @param trace
-	 *            If set to true, the node will print a notice about all sent
+	 *            if set to true, the node will print a notice about all sent
 	 *            and received messages to the standard output.
 	 */
 	public PastryPushSum(Node node, int stepSize, int updateInterval, ValueReader valueReader, double min, double max, boolean trace)
@@ -152,8 +152,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 
 	/**
 	 * Stops the participation of this node. There is no way to actually remove
-	 * an application from the ring. We simply stop sending messages.<br/>
-	 * <br/>
+	 * an application from the ring. We simply stop sending messages.
+	 * <p>
 	 * When receiving a message while stopped, the node will forward the message
 	 * to another random node.
 	 */
@@ -222,8 +222,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	 * Returns the average value of all nodes in the ring, as estimated by the
 	 * Push-Sum protocol. The estimate is obtained by
 	 * <code>value / weight</code>, bounded by the <code>min</code> and
-	 * <code>max</code> values given in the constructor.<br/>
-	 * <br/>
+	 * <code>max</code> values given in the constructor.
+	 * <p>
 	 * If the true value has been updated recently, this will return the true
 	 * value instead, until one message from another node is received, as in
 	 * this case it serves as a better estimate.
@@ -234,8 +234,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	}
 
 	/**
-	 * Sends a reset notification to all nodes.<br/>
-	 * <br/>
+	 * Sends a reset notification to all nodes.
+	 * <p>
 	 * Since this is not a barrier, the resets introduce an error in the
 	 * accuracy of the estimates. Overall it may be better not to do any resets,
 	 * letting the contribution of stopped nodes "fade out".
@@ -250,8 +250,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * When receiving a heartbeat message, sum up the values and weights from
 	 * all messages received since the last step and send half of the new value
-	 * and weight to oneself and a random neighbor. <br/>
-	 * <br/>
+	 * and weight to oneself and a random neighbor.
+	 * <p>
 	 * When receiving a message from another node, store the received value and
 	 * weight in a buffer for the next step.
 	 */

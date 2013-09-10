@@ -61,7 +61,7 @@ public final class PPSSimulator
 	 * standard out.
 	 * 
 	 * @param file
-	 *            The file to redirect to.
+	 *            the file to redirect to.
 	 * @throws FileNotFoundException
 	 *             If the file is a path to a directory or cannot be created or
 	 *             opened.

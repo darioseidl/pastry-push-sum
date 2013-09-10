@@ -40,15 +40,15 @@ public class VariableValueReader implements ValueReader
 
 	/**
 	 * @param initialValue
-	 *            The initial value, which will be returned by the first call to
+	 *            the value which will be returned by the first call to
 	 *            <code>getCurrentValue()</code>.
 	 * @param std
-	 *            After each call of <code>getCurrentValue()</code> the value is
+	 *            after each call of <code>getCurrentValue()</code> the value is
 	 *            changed by a number chosen at random from a normal
 	 *            distribution with mean 0 and standard deviation
 	 *            <code>std</code>.
 	 * @param randomSource
-	 *            An instance of {@link RandomSource} used for generating the
+	 *            an instance of {@link RandomSource} used for generating the
 	 *            random numbers in this class.
 	 */
 	public VariableValueReader(double initialValue, double std, RandomSource randomSource)

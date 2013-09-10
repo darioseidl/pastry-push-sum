@@ -93,7 +93,7 @@ public class PPSSetup
 	 * Creates an environment for using the simulator, with a fixed random seed.
 	 * 
 	 * @param randomSeed
-	 *            If not null or 0, use this as the random seed for the
+	 *            if not null or 0, use this as the random seed for the
 	 *            simulator. In that case the results will always be the same.
 	 */
 	public PPSSetup(Integer randomSeed)
@@ -118,11 +118,11 @@ public class PPSSetup
 	 * Creates an environment for using the network.
 	 * 
 	 * @param bootAddress
-	 *            The IP address of the boot node.
+	 *            the IP address of the boot node.
 	 * @param bootPort
-	 *            The port of the boot node.
+	 *            the port of the boot node.
 	 * @param bindPort
-	 *            The port to bind for this node. In case multiple nodes are
+	 *            the port to bind for this node. In case multiple nodes are
 	 *            booted by this class, this port will be used for the first
 	 *            node, and incremented by 1 for each node thereafter.
 	 * @throws IOException
@@ -145,29 +145,29 @@ public class PPSSetup
 	 * Creates new nodes and boot them into the ring.
 	 * 
 	 * @param period
-	 *            The time to wait between creating each new node.
+	 *            the time to wait between creating each new node.
 	 * @param nodes
-	 *            The number of new nodes.
+	 *            the number of new nodes.
 	 * @param valueReaderFactory
-	 *            A {@link ValueReaderFactory} that creates {@link ValueReader}
+	 *            a {@link ValueReaderFactory} that creates {@link ValueReader}
 	 *            instances for the new nodes.
 	 * @param stepSize
-	 *            The time between sending messages to the node to signal the
+	 *            the time between sending messages to the node to signal the
 	 *            start of the next step in the Push-Sum protocol.
 	 * @param updateInterval
-	 *            The number of steps between updating node values. If set to 0,
+	 *            the number of steps between updating node values. If set to 0,
 	 *            the node values will never be updated.
 	 * @param min
-	 *            The domain-specific minimum possible value, used as a lower
+	 *            the domain-specific minimum possible value, used as a lower
 	 *            bound for the estimates.
 	 * @param max
-	 *            The domain-specific maximum possible value, used as an upper
+	 *            the domain-specific maximum possible value, used as an upper
 	 *            bound for the estimates.
 	 * @param traceMessages
-	 *            If set to true, the new nodes will log all sent and received
+	 *            if set to true, the new nodes will log all sent and received
 	 *            messages.
 	 * @param doAfter
-	 *            A {@link rice.selector.TimerTask} to execute after all nodes
+	 *            a {@link rice.selector.TimerTask} to execute after all nodes
 	 *            have been booted.
 	 */
 	public void scheduleJoiningNodes(long period, final int nodes, final ValueReaderFactory valueReaderFactory, final int stepSize,
@@ -269,24 +269,24 @@ public class PPSSetup
 	 * Periodically creates new nodes and boot them into the ring.
 	 * 
 	 * @param period
-	 *            The time to wait between creating each new node.
+	 *            the time to wait between creating each new node.
 	 * @param valueReaderFactory
-	 *            A {@link ValueReaderFactory} that creates {@link ValueReader}
+	 *            a {@link ValueReaderFactory} that creates {@link ValueReader}
 	 *            instances for the new nodes.
 	 * @param stepSize
-	 *            The time between sending messages to the node to signal the
+	 *            the time between sending messages to the node to signal the
 	 *            start of the next step in the Push-Sum protocol.
 	 * @param updateInterval
-	 *            The number of steps between updating node values. If set to 0,
+	 *            the number of steps between updating node values. If set to 0,
 	 *            the node values will never be updated.
 	 * @param min
-	 *            The minimum possible value, used as a lower bound for the
+	 *            the minimum possible value, used as a lower bound for the
 	 *            estimates.
 	 * @param max
-	 *            The maximum possible value, used as an upper bound for the
+	 *            the maximum possible value, used as an upper bound for the
 	 *            estimates.
 	 * @param traceMessages
-	 *            If set to true, the new nodes will log all sent and received
+	 *            if set to true, the new nodes will log all sent and received
 	 *            messages.
 	 */
 	public void scheduleJoiningNodes(long period, final ValueReaderFactory valueReaderFactory, final int stepSize,
@@ -375,7 +375,7 @@ public class PPSSetup
 	 * Destroys the environment after the given delay.
 	 * 
 	 * @param delay
-	 *            Time before the environment is destroyed.
+	 *            the time before the environment is destroyed.
 	 */
 	public void scheduleTermination(long delay)
 	{
