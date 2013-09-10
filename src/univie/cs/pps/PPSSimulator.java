@@ -48,7 +48,7 @@ import com.beust.jcommander.Parameters;
 
 /**
  * This class is used to study the behavior of the {@link PastryPushSum}
- * application.
+ * application in a simulation environment.
  * 
  * @author Dario Seidl
  * 

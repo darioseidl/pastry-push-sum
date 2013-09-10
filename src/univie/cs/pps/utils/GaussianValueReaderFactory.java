@@ -38,9 +38,9 @@ public class GaussianValueReaderFactory implements ValueReaderFactory
 	private final RandomSource randomSource;
 
 	/**
-	 * Sets up a factory for creating {@link ValueReader} instances, with the
-	 * initial value drawn from a normal distribution with mean {@code mean} and
-	 * standard deviation {@code std}.
+	 * Sets up a factory for creating {@link GaussianValueReader} instances,
+	 * with the initial value drawn from a normal distribution with mean
+	 * {@code mean} and standard deviation {@code std}.
 	 * 
 	 * @param mean
 	 *            the mean of the normal distribution from which the initial
@@ -50,8 +50,9 @@ public class GaussianValueReaderFactory implements ValueReaderFactory
 	 *            the initial value is chosen.
 	 * @param variateStd
 	 *            after each call of {@code ValueReader.getCurrentValue()} the
-	 *            value is changed by a number chosen at random from a normal
-	 *            distribution with mean 0 and standard deviation {@code std}.
+	 *            return value is changed by a number chosen at random from a
+	 *            normal distribution with mean 0 and standard deviation
+	 *            {@code std}.
 	 * @param randomSource
 	 *            an instance of {@link RandomSource} used for generating the
 	 *            random numbers in this class.
@@ -65,8 +66,9 @@ public class GaussianValueReaderFactory implements ValueReaderFactory
 	}
 
 	/**
-	 * Returns a new {@link GaussianValueReader} initialized with the same
-	 * parameters as this class.
+	 * Returns a new {@link GaussianValueReader} initialized with a random
+	 * initial value and parameter values as specified in the constructor of
+	 * this class.
 	 */
 	@Override
 	public ValueReader createValueReader()

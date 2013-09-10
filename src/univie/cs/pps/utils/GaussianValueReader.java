@@ -26,7 +26,7 @@ import rice.environment.random.RandomSource;
 import univie.cs.pps.PPSSetup;
 
 /**
- * An implementation of the {@link ValueReader} interface, simulating variable
+ * An implementation of the {@link ValueReader} interface, simulating varying
  * values. After the value is read, it is changed by a random amount.
  * 
  * @author Dario Seidl

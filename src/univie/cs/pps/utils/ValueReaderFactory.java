@@ -31,7 +31,7 @@ package univie.cs.pps.utils;
 public interface ValueReaderFactory
 {
 	/**
-	 * @return a new {@link ValueReader}
+	 * Returns a new {@link ValueReader}.
 	 */
 	ValueReader createValueReader();
 }

@@ -49,13 +49,17 @@ import univie.cs.pps.utils.ValueReaderFactory;
 
 /**
  * The PPSSetup class is used by {@link PPSSimulator} and {@link PPSPeer} to
- * create the pastry environment, boot the nodes, and observe the results.
+ * create the Pastry environment, boot the nodes, and observe the results.
  * 
  * @author Dario Seidl
  * 
  */
 public class PPSSetup
 {
+	private static boolean join;
+	private static boolean leave;
+	private static double variation;
+
 	/**
 	 * Used to keep track of value variations from the
 	 * {@link GaussianValueReader} objects, for logging and plotting.
@@ -64,10 +68,6 @@ public class PPSSetup
 	{
 		variation += Math.abs(v);
 	}
-
-	private static boolean join;
-	private static boolean leave;
-	private static double variation;
 
 	private final Environment environment;
 	private final NetworkSimulator<DirectNodeHandle, RawMessage> simulator;

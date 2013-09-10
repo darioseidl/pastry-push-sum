@@ -34,7 +34,7 @@ import univie.cs.pps.PastryPushSum;
 public interface ValueReader
 {
 	/**
-	 * Called by {@link PastryPushSum} to update the true value of the node.
+	 * Called by {@link PastryPushSum} to update the value of the node.
 	 */
 	double getCurrentValue();
 }
