@@ -7,17 +7,17 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package univie.cs.pps;
@@ -43,9 +43,9 @@ import rice.pastry.socket.SocketPastryNodeFactory;
 import rice.pastry.standard.RandomNodeIdFactory;
 import rice.selector.TimerTask;
 import univie.cs.pps.utils.FormattedStatistics;
+import univie.cs.pps.utils.GaussianValueReader;
 import univie.cs.pps.utils.ValueReader;
 import univie.cs.pps.utils.ValueReaderFactory;
-import univie.cs.pps.utils.GaussianValueReader;
 
 /**
  * The PPSSetup class is used by {@link PPSSimulator} and {@link PPSPeer} to
@@ -57,7 +57,7 @@ import univie.cs.pps.utils.GaussianValueReader;
 public class PPSSetup
 {
 	/**
-	 * Used to keep track of node variations from the
+	 * Used to keep track of value variations from the
 	 * {@link GaussianValueReader} objects, for logging and plotting.
 	 */
 	public static void addVariation(double v)
@@ -173,7 +173,7 @@ public class PPSSetup
 	public void scheduleJoiningNodes(long period, final int nodes, final ValueReaderFactory valueReaderFactory, final int stepSize,
 			final int updateInterval, final double min, final double max, final boolean traceMessages, final TimerTask doAfter)
 	{
-		//stop simulator to get deterministic results
+		// stop simulator to get deterministic results
 		if (simulator != null)
 		{
 			simulator.stop();
@@ -190,12 +190,12 @@ public class PPSSetup
 				{
 					join = true;
 
-					//create node
+					// create node
 					final PastryNode node = nodeFactory.newNode();
 
 					log("Create new node " + node + ".");
 
-					//create push sum application
+					// create push sum application
 					PastryPushSum app = new PastryPushSum(node, stepSize, updateInterval, valueReaderFactory.createValueReader(), min, max,
 							traceMessages);
 
@@ -235,7 +235,7 @@ public class PPSSetup
 						}
 					});
 
-					//boot node
+					// boot node
 					if (simulator != null)
 					{
 						node.boot(bootHandle);
@@ -246,7 +246,7 @@ public class PPSSetup
 						node.boot(socketBootAddress);
 					}
 
-					//cancel task after nodes have been created
+					// cancel task after nodes have been created
 					if (currentNode >= nodes)
 					{
 						cancel();

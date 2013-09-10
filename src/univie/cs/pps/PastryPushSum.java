@@ -7,17 +7,17 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * 
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package univie.cs.pps;
@@ -128,7 +128,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		this.max = max;
 		this.trace = trace;
 
-		//obtain true value from the value reader
+		// obtain true value from the value reader
 		trueValue = valueReader.getCurrentValue();
 
 		value = trueValue;
@@ -136,15 +136,15 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		weight = 1.;
 		weightBuffer = 1.;
 
-		//register application
+		// register application
 		endpoint = node.buildEndpoint(this, INSTANCE);
 		endpoint.register();
 
-		//schedule timer messages 
+		// schedule timer messages
 		timer = endpoint.scheduleMessage(new TimerMessage(), 0, stepSize);
 		active = true;
 
-		//subscribe to a scribe topic for reset notifications
+		// subscribe to a Scribe topic for reset notifications
 		scribe = new ScribeImpl(node, SCRIBE_INSTANCE);
 		resetTopic = new Topic(new PastryIdFactory(node.getEnvironment()), TOPIC_NAME);
 		scribe.subscribe(resetTopic, this, null, null);
@@ -154,8 +154,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	 * Stops the participation of this node. There is no way to actually remove
 	 * an application from the ring. We simply stop sending messages.
 	 * <p>
-	 * When receiving a message while stopped, the node will forward the message
-	 * to another random node.
+	 * When receiving a message while stopped, this node will forward the
+	 * message to another random node.
 	 */
 	public void stop()
 	{
@@ -220,9 +220,9 @@ public class PastryPushSum implements Application, ScribeMultiClient
 
 	/**
 	 * Returns the average value of all nodes in the ring, as estimated by the
-	 * Push-Sum protocol. The estimate is obtained by
-	 * {@code value / weight}, bounded by the {@code min} and
-	 * {@code max} values given in the constructor.
+	 * Push-Sum protocol. The estimate is obtained by {@code value / weight},
+	 * bounded by the {@code min} and {@code max} values given in the
+	 * constructor.
 	 * <p>
 	 * If the true value has been updated recently, this will return the true
 	 * value instead, until one message from another node is received, as in
@@ -245,12 +245,14 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		scribe.publish(resetTopic, new ResetNotification());
 	}
 
-	//== Application methods ============//
+	// == Application methods ============ //
 
 	/**
-	 * When receiving a heartbeat message, sum up the values and weights from
-	 * all messages received since the last step and send half of the new value
-	 * and weight to oneself and a random neighbor.
+	 * Called when this node receives a message.
+	 * <p>
+	 * When receiving a timer message, sum up the values and weights from all
+	 * messages received since the last step and send half of the new value and
+	 * weight to itself and to a random neighbor.
 	 * <p>
 	 * When receiving a message from another node, store the received value and
 	 * weight in a buffer for the next step.
@@ -263,16 +265,16 @@ public class PastryPushSum implements Application, ScribeMultiClient
 			log("received " + message);
 		}
 
-		//next step
+		// next step
 		if (message instanceof TimerMessage)
 		{
 			step++;
 
-			//sum up received values
+			// sum up received values
 			value = valueBuffer;
 			weight = weightBuffer;
 
-			//update value
+			// update value
 			if (updateInterval > 0 && step % updateInterval == 0)
 			{
 				double newValue = valueReader.getCurrentValue();
@@ -281,11 +283,11 @@ public class PastryPushSum implements Application, ScribeMultiClient
 				trueValue = newValue;
 			}
 
-			//send to self
+			// send to self
 			valueBuffer = value / 2;
 			weightBuffer = weight / 2;
 
-			//send to random neighbor
+			// send to random neighbor
 			Id randomId = (new RandomNodeIdFactory(node.getEnvironment())).generateNodeId();
 			ValueWeightMessage response = new ValueWeightMessage(endpoint.getId(), randomId, value / 2, weight / 2);
 			endpoint.route(randomId, response, null);
@@ -297,7 +299,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 
 		}
 
-		//message from another node
+		// message from another node
 		else if (message instanceof ValueWeightMessage)
 		{
 			if (active)
@@ -311,7 +313,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 			}
 			else
 			{
-				//if we stopped participating, but are still in the ring, forward messages to another random node
+				// if we stopped participating, but are still in the ring,
+				// forward messages to another random node
 				Id randomId = (new RandomNodeIdFactory(node.getEnvironment())).generateNodeId();
 				endpoint.route(randomId, message, null);
 			}
@@ -319,6 +322,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	}
 
 	/**
+	 * Called when this node is about to forward a message.
+	 * <p>
 	 * All messages are forwarded in this application.
 	 */
 	@Override
@@ -332,6 +337,12 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		return true;
 	}
 
+	/**
+	 * Called when a node joins or leaves the neighbor set of this node.
+	 * <p>
+	 * No action is taken when a node joins or leaves the neighbor set of this
+	 * node.
+	 */
 	@Override
 	public void update(NodeHandle handle, boolean joined)
 	{
@@ -341,11 +352,14 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		}
 	}
 
-	//== ScribeMultiClient methods ============//
+	// == ScribeMultiClient methods ============ //
 
 	/**
-	 * When receiving a reset notification, the value is reset to the true value
-	 * and the weight is reset to 1.
+	 * Called when a message is received for a topic this node has subscribed.
+	 * <p>
+	 * This application only uses one topic to broadcast reset notifications.
+	 * When receiving a reset notification, reset the current value to the
+	 * original value and set the weight to 1.
 	 */
 	@Override
 	public void deliver(Topic topic, ScribeContent content)
@@ -364,17 +378,22 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		}
 	}
 
+	/**
+	 * Called when an anycast is received for a topic this node has subscribed.
+	 * <p>
+	 * This application doesn't use anycasts.
+	 */
 	@Override
 	public boolean anycast(Topic topic, ScribeContent content)
 	{
-		if (trace)
-		{
-			log("anycast (" + topic + "," + content + ")");
-		}
-
 		return false;
 	}
 
+	/**
+	 * Called when an child is added to a topic this node has subscribed.
+	 * <p>
+	 * No action, except logging, is taken on this event.
+	 */
 	@Override
 	public void childAdded(Topic topic, NodeHandle child)
 	{
@@ -384,6 +403,11 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		}
 	}
 
+	/**
+	 * Called when an child is removed to a topic this node has subscribed.
+	 * <p>
+	 * No action, except logging, is taken on this event.
+	 */
 	@Override
 	public void childRemoved(Topic topic, NodeHandle child)
 	{
@@ -393,6 +417,11 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		}
 	}
 
+	/**
+	 * Called when subscribing to a topic failed.
+	 * <p>
+	 * No action, except logging, is taken on this event.
+	 */
 	@Override
 	@Deprecated
 	public void subscribeFailed(Topic topic)
@@ -403,6 +432,11 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		}
 	}
 
+	/**
+	 * Called when subscribing to a topic failed.
+	 * <p>
+	 * No action, except logging, is taken on this event.
+	 */
 	@Override
 	public void subscribeFailed(Collection<Topic> topics)
 	{
@@ -412,6 +446,11 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		}
 	}
 
+	/**
+	 * Called when subscribing to a topic succeeded.
+	 * <p>
+	 * No action, except logging, is taken on this event.
+	 */
 	@Override
 	public void subscribeSuccess(Collection<Topic> topics)
 	{
@@ -421,7 +460,7 @@ public class PastryPushSum implements Application, ScribeMultiClient
 		}
 	}
 
-	//==========================================//
+	// ========================================== //
 
 	@Override
 	public String toString()
