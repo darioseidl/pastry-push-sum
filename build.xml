@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="build" name="pastry-push-sum">
+<project basedir="." default="default" name="pastry-push-sum">
     
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
@@ -31,9 +31,7 @@
 	
     <target name="build" description="Compile the Java classes.">
 		<mkdir dir="bin"/>
-        <javac classpathref="classpath" debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-        </javac>
+        <javac classpathref="classpath" debug="true" debuglevel="${debuglevel}" srcdir="src" destdir="bin" includeantruntime="false" source="${source}" target="${target}"/>
     </target>
 	
 	<target name="docs" depends="build" description="Create the Javadoc.">
@@ -46,6 +44,8 @@
 			<link href="http://jcommander.org/apidocs/"/>
 		</javadoc>
 	</target>
+	
+	<target name="default" depends="build, docs" description="Compile the Java classes and create the Javadoc."/>
 	
 	<!-- === example run targets === -->
     
