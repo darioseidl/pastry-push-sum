@@ -221,8 +221,8 @@ public class PastryPushSum implements Application, ScribeMultiClient
 	/**
 	 * Returns the average value of all nodes in the ring, as estimated by the
 	 * Push-Sum protocol. The estimate is obtained by
-	 * <code>value / weight</code>, bounded by the <code>min</code> and
-	 * <code>max</code> values given in the constructor.
+	 * {@code value / weight}, bounded by the {@code min} and
+	 * {@code max} values given in the constructor.
 	 * <p>
 	 * If the true value has been updated recently, this will return the true
 	 * value instead, until one message from another node is received, as in
