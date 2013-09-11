@@ -22,7 +22,7 @@ that left the network. In order to estimate the true mean after a node left,
 the algorithm must be reset. All nodes must reset their values at the same 
 time. We use multicasts to notify all nodes to periodically reset their 
 values. FreePastry supports multicast via Scribe [4].
-
+ 
 
 
 Usage
