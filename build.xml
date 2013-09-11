@@ -228,14 +228,5 @@
 	</target>
 	
 	<target name="all-plots" depends="clean-plot,plot-n10,plot-n100j100,plot-n100j10,plot-n10v100,plot-n10v100j50,plot-n10v100j50l75" description="Simulate and plot all parameter sets."/>
-
-	<target name="all-plots-open" depends="all-plots" description="Simulate and plot all parameter sets; open an image of all plots combined.">
-		<exec executable="montage" osfamily="unix">
-			<arg line="-geometry +0+0 -border 1 ./plot/*.${ext} ./plot/all.png"/>
-		</exec>
-		<exec executable="xdg-open" osfamily="unix">
-			<arg line="./plot/all.png"/>
-		</exec>
-	</target>
 	
 </project>
