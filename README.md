@@ -27,11 +27,11 @@ values. FreePastry supports multicast via Scribe [4].
 Usage
 --------------------------------------------------------------------------------
 
-You can obtain the source of this project from the
-[Github repository](https://github.com/darioseidl/pastry-push-sum).
+You can obtain the source of this project from the [Github repository]
+(https://github.com/darioseidl/pastry-push-sum).
 
-The Javadocs can be accessed at the 
-[Github pages](http://darioseidl.github.io/pastry-push-sum/doc/).
+The Javadocs can be accessed at the [Github pages]
+(http://darioseidl.github.io/pastry-push-sum/doc/).
 
 The project comes with two main classes, PPSPeer and PPSSimulator. The 
 PPSPeer class is a proof of concept application to estimates the mean value 
