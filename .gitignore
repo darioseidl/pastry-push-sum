@@ -1,4 +1,4 @@
 /bin
 /plot
-/doc
 /mybuild.xml
+/push-gh-pages.sh
