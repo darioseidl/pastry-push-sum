@@ -22,18 +22,22 @@ that left the network. In order to estimate the true mean after a node left,
 the algorithm must be reset. All nodes must reset their values at the same 
 time. We use multicasts to notify all nodes to periodically reset their 
 values. FreePastry supports multicast via Scribe [4].
- 
 
 
 Usage
 --------------------------------------------------------------------------------
 
-The project comes with two main classes, PPSPeer and PPSSimulator.
+You can obtain the source of this project from the
+[Github repository](https://github.com/darioseidl/pastry-push-sum).
 
-The PPSPeer class is a proof of concept application to estimates the mean 
-value among all participating nodes in the ring. To join the ring, all but 
-the first peer, must know the address of a node already in the ring. The 
-nodes will immediately and continuously estimate the average value among all 
+The Javadocs can be accessed at the 
+[Github pages](http://darioseidl.github.io/pastry-push-sum/doc/).
+
+The project comes with two main classes, PPSPeer and PPSSimulator. The 
+PPSPeer class is a proof of concept application to estimates the mean value 
+among all participating nodes in the ring. To join the ring, all but the 
+first peer, must know the address of a node already in the ring. The nodes 
+will immediately and continuously estimate the average value among all 
 nodes. In the current implementation the node values are simulated. To 
 plug-in an actual data source, the nodes obtain their values from a 
 ValueReader interface. A data source must provide an implementation of the 
