@@ -2,7 +2,7 @@ Pastry-Push-Sum
 ================================================================================
 
 Pastry-Push-Sum is an implementation of the Push-Sum [1] algorithm as a 
-FreePastry [2] application.
+[FreePastry](http://www.freepastry.org/) application.
 
 Push-Sum is a gossip-based protocol for calculating aggregates, such as the 
 mean, among all nodes in the network. It is fully decentralized, based on 
@@ -11,17 +11,19 @@ knowledge about the network topology and supports nodes joining the network
 and nodes changing their value at any time. To achieve a high convergence 
 speed, the nodes must be able to send to any other nodes in the network.
 
-For that we use the Pastry [3] protocol to construct an overlay network in 
+For that we use the Pastry [2] protocol to construct an overlay network in 
 which messages are routed to any destination. The nodes send their messages 
 to randomly generated IDs and the messages will be forwarded to the node 
 with the numerically closest ID.
 
 In the case of nodes leaving the network, the Push-Sum algorithm is not able 
-to determine the mean of only the available nodes, excluding the nodes 
-that left the network. In order to estimate the true mean after a node left, 
-the algorithm must be reset. All nodes must reset their values at the same 
-time. We use multicasts to notify all nodes to periodically reset their 
-values. FreePastry supports multicast via Scribe [4].
+to determine the mean of only the available nodes, excluding the nodes that 
+left the network. In order to estimate the true mean after a node left, the 
+algorithm must be reset. All nodes must reset their values at the same time. 
+We use multicasts to notify all nodes to periodically reset their values. 
+FreePastry supports multicast via [Scribe]
+(http://www.freepastry.org/SCRIBE/default.htm) [3].
+
 
 
 Usage
@@ -71,7 +73,7 @@ To see a list of all available targets, use
 
 	ant -projecthelp
 
-To build the project and to generate the javadocs, use
+To build the project and to generate the Javadocs, use
 
 	ant build, docs
 
@@ -92,7 +94,7 @@ will run several simulations and plot the results:
 If you have Gnuplot installed, but the binary is not in your path, you can 
 specify the location in the gnuplot_bin ant property. For example
 
-	ant -Dgnuplot_bin="C:\Program Files (x86)\gnuplot\bin\gnuplot.exe" all-plots
+	ant -Dgnuplot_bin="C:\Program Files\gnuplot\bin\gnuplot.exe" all-plots
 
 
 
@@ -100,14 +102,15 @@ References
 --------------------------------------------------------------------------------
 
 [1] D. Kempe, A. Dobra and J. Gehrke, "Gossip-based Computation of Aggregate 
-Information" In Proc. of the 44th Annual IEEE Symposium on Foundations of 
-Computer Science (FOCS '03), pages 482–491, October, 2003.
+Information". In Proceedings of the 44th Annual IEEE Symposium on Foundations of 
+Computer Science (FOCS'03), pages 482–491, October, 2003.
 
-[2] http://www.freepastry.org/
-
-[3] A. Rowstron and P. Druschel, "Pastry: Scalable, distributed object 
+[2] A. Rowstron and P. Druschel, "Pastry: Scalable, distributed object 
 location and routing for large-scale peer-to-peer systems". IFIP/ACM 
-International Conference on Distributed Systems Platforms (Middleware), 
-Heidelberg, Germany, pages 329-350, November, 2001. 
+International Conference on Distributed Systems Platforms (Middleware'01), 
+pages 329–350, November, 2001. 
 
-[4] http://www.freepastry.org/SCRIBE/default.htm
+[3] A. Rowstron, A-M. Kermarrec, M. Castro and P. Druschel, "SCRIBE: The 
+Design of a Large-Scale Event Notification Infrastructure". In Proceedings 
+of the Third International COST264 Workshop on Networked Group Communication 
+(NGC'01), pages 30–43, November, 2001. 
