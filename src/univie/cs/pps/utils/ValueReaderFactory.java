@@ -25,7 +25,7 @@ package univie.cs.pps.utils;
 /**
  * Factory interface for creating {@link ValueReader} instances.
  * 
- * @author DarioSeidl
+ * @author Dario Seidl
  * 
  */
 public interface ValueReaderFactory

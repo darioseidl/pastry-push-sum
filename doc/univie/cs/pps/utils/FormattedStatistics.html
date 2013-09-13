@@ -162,8 +162,8 @@ A subclass of <A HREF="http://commons.apache.org/proper/commons-math/javadocs/ap
 <TD><CODE><B><A HREF="../../../../univie/cs/pps/utils/FormattedStatistics.html#header(java.lang.String)">header</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a header with column names, each followed bymatching the format
- of the <code>toString</code> implementation of this class.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a header with column names, each followed by <code>suffix</code>,
+ matching the format of the <code>toString</code> implementation of this class.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -181,7 +181,8 @@ A subclass of <A HREF="http://commons.apache.org/proper/commons-math/javadocs/ap
 <TD><CODE><B><A HREF="../../../../univie/cs/pps/utils/FormattedStatistics.html#toString()">toString</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a string of the following statistics of the added values: count,
+ minimum, maximum, mean, standard deviation, and root-mean-square.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.commons.math3.stat.descriptive.SummaryStatistics"><!-- --></A>
@@ -266,8 +267,8 @@ header</H3>
 <PRE>
 public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>header</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;suffix)</PRE>
 <DL>
-<DD>Returns a header with column names, each followed bymatching the format
- of the <code>toString</code> implementation of this class.
+<DD>Returns a header with column names, each followed by <code>suffix</code>,
+ matching the format of the <code>toString</code> implementation of this class.
 <P>
 <DD><DL>
 </DL>
@@ -293,6 +294,9 @@ toString</H3>
 <PRE>
 public <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toString</B>()</PRE>
 <DL>
+<DD>Returns a string of the following statistics of the added values: count,
+ minimum, maximum, mean, standard deviation, and root-mean-square.
+<P>
 <DD><DL>
 <DT><B>Overrides:</B><DD><CODE><A HREF="http://commons.apache.org/proper/commons-math/javadocs/api-3.2/org/apache/commons/math3/stat/descriptive/SummaryStatistics.html?is-external=true#toString()" title="class or interface in org.apache.commons.math3.stat.descriptive">toString</A></CODE> in class <CODE><A HREF="http://commons.apache.org/proper/commons-math/javadocs/api-3.2/org/apache/commons/math3/stat/descriptive/SummaryStatistics.html?is-external=true" title="class or interface in org.apache.commons.math3.stat.descriptive">SummaryStatistics</A></CODE></DL>
 </DD>

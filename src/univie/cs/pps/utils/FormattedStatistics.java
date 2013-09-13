@@ -52,8 +52,8 @@ public class FormattedStatistics extends SummaryStatistics
 	}
 
 	/**
-	 * Returns a header with column names, each followed bymatching the format
-	 * of the {@code toString} implementation of this class.
+	 * Returns a header with column names, each followed by {@code suffix},
+	 * matching the format of the {@code toString} implementation of this class.
 	 */
 	public static String header(String suffix)
 	{
@@ -69,6 +69,10 @@ public class FormattedStatistics extends SummaryStatistics
 		return Math.sqrt(getSumsq() / getN());
 	}
 
+	/**
+	 * Returns a string of the following statistics of the added values: count,
+	 * minimum, maximum, mean, standard deviation, and root-mean-square.
+	 */
 	@Override
 	public String toString()
 	{
