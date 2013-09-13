@@ -30,8 +30,11 @@ Usage
 You can obtain the source of this project from the [Github repository]
 (https://github.com/darioseidl/pastry-push-sum).
 
-The Javadocs can be accessed at the [Github pages]
+The Javadocs can be accessed at the [Github project pages]
 (http://darioseidl.github.io/pastry-push-sum/doc/).
+
+You can import the project in Eclipse, use the ant buildfile to compile and 
+run the examples, or run the main classes directly.
 
 The project comes with two main classes, PPSPeer and PPSSimulator. The 
 PPSPeer class is a proof of concept application to estimates the mean value 
@@ -48,14 +51,11 @@ The PPSSimulator is used to study the behavior of the implementation in the
 Pastry simulator under different parameters. The output is suitable for 
 being plotted with Gnuplot.
 
-You can import the project in Eclipse or run the applications using the 
-following commands:
-
-For PPSPeer
+To run PPSPeer use the following command:
 
 	java -classpath ./bin:./lib/freepastry-2.1/FreePastry-2.1.jar:./lib/jcommander-1.30/jcommander-1.30.jar:./lib/commons-io-2.4/commons-io-2.4.jar:./lib/commons-lang3-3.1/commons-lang3-3.1.jar:./lib/commons-math3-3.2/commons-math3-3.2.jar univie.cs.pps.PPSPeer -h
 
-For PPSSimulator
+For PPSSimulator, use
 
 	java -classpath ./bin:./lib/freepastry-2.1/FreePastry-2.1.jar:./lib/jcommander-1.30/jcommander-1.30.jar:./lib/commons-io-2.4/commons-io-2.4.jar:./lib/commons-lang3-3.1/commons-lang3-3.1.jar:./lib/commons-math3-3.2/commons-math3-3.2.jar univie.cs.pps.PPSSimulator -h
 
@@ -63,7 +63,7 @@ In both cases, the use of the -h argument will print a list of all available
 arguments.
 
 
-The project also provides an ant file to build and run the applications.
+The project also provides an ant buildfile to build and run the applications.
 Note that for ant to work, the JAVA_HOME environment variable needs to be 
 set to a JDK 6 or higher.
 
@@ -99,9 +99,9 @@ specify the location in the gnuplot_bin ant property. For example
 References
 --------------------------------------------------------------------------------
 
-[1] D. Kempe, A. Dobra and J. Gehrke, "Gossip-based computation of aggregate 
-information," Foundations of Computer Science, 2003. Proceedings. 44th 
-Annual IEEE Symposium on , vol., no., pp.482,491, 11-14 Oct. 2003
+[1] D. Kempe, A. Dobra and J. Gehrke, "Gossip-based Computation of Aggregate 
+Information" In Proc. of the 44th Annual IEEE Symposium on Foundations of 
+Computer Science (FOCS '03), pages 482–491, October, 2003.
 
 [2] http://www.freepastry.org/
 
