@@ -86,8 +86,8 @@ localhost:9002 and localhost:9003, can be started with
 
 	ant run-three-peers
 
-With Gnuplot installed and the binary in your path, the following command 
-will run several simulations and plot the results:
+With [Gnuplot](http://www.gnuplot.info/) installed and the binary in your path,
+the following command will run several simulations and plot the results:
 
 	ant all-plots
 	
