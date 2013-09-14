@@ -90,7 +90,9 @@ With [Gnuplot](http://www.gnuplot.info/) installed and the binary in your path,
 the following command will run several simulations and plot the results:
 
 	ant all-plots
-	
+
+The simulation results and the plots will be saved to the plot folder.
+
 If you have Gnuplot installed, but the binary is not in your path, you can 
 specify the location in the gnuplot_bin ant property. For example
 
